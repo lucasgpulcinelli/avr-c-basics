@@ -1,3 +1,8 @@
+/*
+Copyright (c) 2020, Lucas Eduardo Gulka Pulcinelli
+This file is licensed under the BSD-3-Clause ("New" or "Revised" BSD) License.
+*/
+
 // program that runs the same code as input.c, but also blinks pin 10, seemingly at the same time
 
 #define F_CPU 16000000L

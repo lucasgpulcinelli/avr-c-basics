@@ -1,4 +1,7 @@
 
+# Copyright (c) 2020, Lucas Eduardo Gulka Pulcinelli
+# This file is licensed under the BSD-3-Clause ("New" or "Revised" BSD) License.
+
 DEV ?= /dev/ttyACM0
 DEVICE ?= atmega328p
 PROGRAMMER ?= arduino
