@@ -1,0 +1,30 @@
+
+DEV ?= /dev/ttyACM0
+DEVICE ?= atmega328p
+PROGRAMMER ?= arduino
+
+
+FILE ?= main
+BUILD_DIR = build
+OUT_FILE = $(BUILD_DIR)/$(FILE)
+SRC_FILE = src/$(FILE).c
+
+.PHONY: clean flash asm
+
+all: output.hex
+	
+output.hex: $(OUT_FILE).bin
+	avr-objcopy -j .text -j .data -O ihex $(OUT_FILE).bin $(BUILD_DIR)/output.hex
+
+$(OUT_FILE).bin: $(SRC_FILE)
+	avr-gcc -Wall -Os -mmcu=$(DEVICE) -o $(OUT_FILE).bin $(SRC_FILE)
+
+clean: 
+	rm -r build/*
+
+asm: $(SRC_FILE)
+	avr-gcc -Wall -Os -mmcu=$(DEVICE) -o $(OUT_FILE).asm -S $(SRC_FILE)
+
+flash:
+	avrdude -p $(DEVICE) -c $(PROGRAMMER) -U flash:w:$(BUILD_DIR)/output.hex:i -F -P $(DEV)
+
