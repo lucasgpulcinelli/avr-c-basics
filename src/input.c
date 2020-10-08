@@ -27,12 +27,12 @@ int main(void)
 		if(PINB & 0b00000001) //the & operations is the logical AND for each bit, meaning getting only what PIN1 has
 		{
 			PORTB = 0b00000001; //set pin 13 to low, turning off the LED immedialy
-			counter = 0; //resets the delay counter
+			counter = 200; //sets the delay counter such that the LED will turn on as soon as the button is released
 		}
 		else
 		{
 			//the ++ increments the counter by one
-			if(counter++ == 200) //if 200 * 5ms seconds of delay happend (1s passed)
+			if(counter++ >= 200) //if 200 * 5ms seconds of delay happend (1s passed)
 			{
 				PORTB ^= 0b00100000; //^ is the logical XOR for each bit, making the LED turn on when it is off and vice-versa (0 ^ 1 = 1, 1 ^ 1 = 0)
 				counter = 0; //resets the counter for the next second of delay

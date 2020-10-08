@@ -44,11 +44,11 @@ int main(void)
 		if(PINB & 0b00000001)
 		{
 			PORTB = 0b00000001;
-			counter = 0;
+			counter = 200;
 		}
 		else
 		{
-			if(counter++ == 200)
+			if(counter++ >= 200)
 			{
 				PORTB ^= 0b00100000;
 				counter = 0;
