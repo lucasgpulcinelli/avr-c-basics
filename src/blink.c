@@ -6,10 +6,9 @@ This file is licensed under the BSD-3-Clause ("New" or "Revised" BSD) License.
 // program to toggle arduino builtin LED on and off every one second
 
 
-
 //DDRX  = data direction register for port X, 0 for input and 1 for output
 //PORTX = values for the 8 pins in port X, 0 for low current (0V) and 1 for high current (5V), no other values allowed
-
+//as PORTA-PORTD pin numbers and arduino pin numbers do not match, see the help/arduino_layout.png file to know the port to pin correspondance for the ATMEGA328p (also with the capabilities of each pin)
 
 #define __AVR_ATmega328P__
 #define F_CPU 16000000L

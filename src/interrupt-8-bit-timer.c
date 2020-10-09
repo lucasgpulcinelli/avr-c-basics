@@ -9,7 +9,7 @@ This file is licensed under the BSD-3-Clause ("New" or "Revised" BSD) License.
 #define F_CPU 16000000L
 
 #include <avr/io.h>
-#include <avr/interrupt.h> //defines the sei() function and the correct registers
+#include <avr/interrupt.h> //defines the sei() macro and the correct registers
 #include <util/delay.h>
 
 //TCCR0A: Timer/counter control register A, the 8 bit timer 0 control/configuring first register
@@ -32,7 +32,7 @@ int main(void)
 
 
 
-	//input.c code, but with pin 10 as output too
+	//input.c code, but with pin 10 (PORTB2) as output too
 	
 	DDRB  = 0b00100100;
 	PORTB = 0b00000001;

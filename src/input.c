@@ -16,15 +16,15 @@ This file is licensed under the BSD-3-Clause ("New" or "Revised" BSD) License.
 
 int main(void)
 {
-	DDRB  = 0b00100000; //set PORTB6 (pin 13) as output and the rest as output (including pin 8)
-	PORTB = 0b00000001; //PORTB1 can recive input (pin 8, Button)
+	DDRB  = 0b00100000; //set PORTB5 (pin 13) as output and the rest as output (including pin 8)
+	PORTB = 0b00000001; //PORTB0 can recive input (pin 8, Button)
 
 	int counter = 0; //counts how many 5ms delays happend 
 
 	while(1)
 	{
-		//if PINB1 is high (button IS pressed)
-		if(PINB & 0b00000001) //the & operations is the logical AND for each bit, meaning getting only what PIN1 has
+		//if PINB0 is high (button IS pressed)
+		if(PINB & 0b00000001) //the & operations is the logical AND for each bit, meaning getting only what PINB0 has
 		{
 			PORTB = 0b00000001; //set pin 13 to low, turning off the LED immedialy
 			counter = 200; //sets the delay counter such that the LED will turn on as soon as the button is released
