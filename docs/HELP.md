@@ -3,6 +3,8 @@ All the examples are located in the src/ directory.
 
 Note that the order of the files presented is the recommended order to follow as a beginner
 
+The datasheet can be found [here](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf) 
+
 
 
 ### main.c:

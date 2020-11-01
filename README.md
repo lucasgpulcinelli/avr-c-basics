@@ -1,6 +1,6 @@
 # AVR C Basics
 
-**Basic AVR-C programs made for testing and learning purposes with the objective of learning and teaching concepts of embedded software with heavly commented examples**, tested on Arduino UNO (atmega328p) (see the help/HELP file to get started).
+**Basic AVR-C programs made for testing and learning purposes with the objective of learning and teaching concepts of embedded software with heavly commented examples**, tested on Arduino UNO (atmega328p) (see the docs/HELP.md file to get started).
 
 
 ### Dependecies to build the project:
