@@ -15,5 +15,6 @@ Build instructions:
 
 
 Note:
-    1) This is an early work-in-progress project, therefore parts of the project may not work on all systems 
+    1) This is an early work-in-progress project, therefore parts of the project may not work on all systems
+    
     2) The only operating system supported until further changes is GNU/Linux, meaning most will want to use WSL or a virtual machine if a Linux-based OS is not avaliable 
