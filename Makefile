@@ -2,7 +2,7 @@
 # Copyright (c) 2020, Lucas Eduardo Gulka Pulcinelli
 # This file is licensed under the BSD-3-Clause ("New" or "Revised" BSD) License.
 
-DEV ?= /dev/ttyACM0
+DEV ?= /dev/ttyACM0 #device containing the arduino (for my machine always is this device no matter the linux distribution, if "no such file or directory" errors ocurr try to find the device in the /dev directory)
 DEVICE ?= atmega328p
 PROGRAMMER ?= arduino
 

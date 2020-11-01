@@ -3,7 +3,7 @@ Copyright (c) 2020, Lucas Eduardo Gulka Pulcinelli
 This file is licensed under the BSD-3-Clause ("New" or "Revised" BSD) License.
 */
 
-//program to toggle the builtin LED on and off each one second, if the button connected on pin 8 (in the arduino) is pressed the LED will turn off and not light until the button is un-presed
+//program to toggle the builtin LED on and off each one second, if the button connected on pin 8 (in the arduino) is pressed the LED will turn off and not light until the button is unpressed
 
 
 //PINX physical voltage states of all port X pins
