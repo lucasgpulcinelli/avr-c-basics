@@ -27,14 +27,14 @@ files:
         note:
             interrupts are essential for multitasking in any system, however heavly dependent on the microcontroller used
 
+    interrupt-16-bit-timer.c:
+        covers:
+            interrupt handling with another type of register
+        note:
+            important for the future pwm handling as the same timer can be used, while also reafirming the importance of the datasheet
+
+
     pwm.c:
         covers:
 
         note:
-
-
-    interrupt-blink-16-bit.c:
-        covers:
-
-        note:
-
