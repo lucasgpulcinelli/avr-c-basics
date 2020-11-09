@@ -25,8 +25,8 @@ int main(void)
 	
 	OCR1A = F_CPU * 1 / 1024; //in this case we won't need to worry about a new counter because F_CPU / 1024 = 15625 < 65535, so an overflow won't occur
 
-	TCCR1B = 0x08 | 0x05; //will set the CTC (clear timer on compare) mode (0x08), and with a preescalar of 1/1024 (0x05), as said in datasheet
-	TIMSK1 = 0x02; //enable the timer 1 interrupt, starting the timer after sei() is called
+	TCCR1B = 0b00001000 | 0b00000101; //will set the CTC (clear timer on compare) mode (0x08), and with a preescalar of 1/1024 (0x05), as said in datasheet
+	TIMSK1 = 0b00000010; //enable the timer 1 interrupt, starting the timer after sei() is called
 	sei();
 
 

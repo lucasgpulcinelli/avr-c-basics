@@ -25,9 +25,9 @@ int main(void)
 	OCR0A = F_CPU * 0.01 / 1024; //timer value to get an interrupt: frequency_clock * time_wanted / preescalar
         						 //as this register is 8 bits, the max value is 255. That's the reason for such small time_wanted, the ISR wil be tweaked to get more time
 
-	TCCR0A = 0x02; //mode CLEAR ON COMPARE, value said on datasheet;
-	TCCR0B = 0x05; //preescalar 1/1024, every 1024 cicles the timer increases by 1, value said on datasheet;
-	TIMSK0 = 0x02; //enables the interrupt for timer 0, value said on datasheet
+	TCCR0A = 0b00000010; //mode CLEAR ON COMPARE, value said on datasheet;
+	TCCR0B = 0b00000101; //preescalar 1/1024, every 1024 cicles the timer increases by 1, value said on datasheet;
+	TIMSK0 = 0b00000010; //enables the interrupt for timer 0, value said on datasheet
 	sei(); //set the interrupt flag, enabling interrupts
 
 
