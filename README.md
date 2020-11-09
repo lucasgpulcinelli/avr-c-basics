@@ -9,10 +9,12 @@ avrdude, avr-libc, avr-gcc, make
 
 
 ### Build instructions: 
-issue "make FILE=<name of the source file inside src/ (without the .c)>" to build the file. To flash to a board use "sudo make flash" (the superuser privileges are necessary for avrdude).
+After cloning the repository and installing dependencies, use a terminal to the root of the project (directy inside a folder named avr_c_basics) issue "make FILE=<name of the source file inside src/ (without the .c)>" to build an specific file. To flash to a board use "sudo make flash" (the superuser privileges are necessary for avrdude).
 
 
 ### Notes:
-1) This is an early work-in-progress project, therefore parts of the project may not work on all systems
+1) It is not necessary for a reader to have any familiarity with C or arduino coding, as most of the basic C concepts and microcontroller essentials will be present as comments in the actual code, however, it can be harder to understand some parts if the reader needs to learn both the syntax and the connection with hardware, therefore following after learning basic coding skills is recommended.
+
+2) This is an early work-in-progress project, therefore parts of the project may not work on all systems
     
-2) The only operating system supported until further changes is GNU/Linux, meaning most will want to use WSL or a virtual machine if a Linux-based OS is not avaliable 
+3) The only operating system supported until further changes is GNU/Linux, meaning most will want to use WSL or a virtual machine if a Linux-based OS is not avaliable 
