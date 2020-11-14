@@ -49,10 +49,19 @@ For the curious, the _delay_ms and _delay_us functions are just definitions for 
 
     
 ### input.c:
-covers basic logical operations (AND and XOR), digital input and making the code more responsive to the user
+A simple program to show input functionality, blinking the LED on pin 13 only when a button connected on pin 8 is not pressed.
+
+### concepts
+This example is much easier to understand if the previous one makes sense: apart from PORTX and DDRX, all pins have an PINX register associated in the same way, however PINX, instead of writing or enabling a certain pin it reads the voltage, showing in software in the perfect way for if else statements (as 1 means "true", it is easy to make the logic)
+
+Also, this example shows another part of C code essentials: bit logic. The '&', '|', '^' and '~' meand the bit wise logical AND, OR, XOR and NOT, respectively. This just means that if we have "numA & numB", just transform the numbers into binary and apply the AND operation to each bit of numA with each bit of numB. For example, 12 & 5 = 0b1100 & 0b0101 = 0b0100 = 4, because 1 & 0 = 0, 1 & 1 = 1, 0 & 0 = 0 and 0 & 1 = 0. If this sounds confusing, think what you would answear if I asked "did you go to the marked AND to school today?", you can only answer "yes" (1) if you did both things (1 for market and 1 for school), so 1 & 1 = 1; the other possibilities will all result to you responding "no". The same idea applies to OR and NOT (note that NOT has only one input instead of two). The XOR is the same as saying (numA OR numB) AND (NOT (numA AND numB)), meaning it is 1 only when there is one, and only one, input with 1.
+
+Another C code part is the number (operator)= value, like "val += 2", meaning the same as "val = val + 2", the same for any other operation.
+
+The last thing to talk about this code is the 5ms delay: this value is used to add responsiveness, because during a big 1000ms delay a person can press the button and release it before the delay ends, appearing sluggish and unresponsive; by contrast, a 5ms delay feels much better. Now you can be asking "Then why not having an even smaller delay?", and the answer is in the fact that the ATMEGA328p is an 8bit processor, meaning the max value for a normal integer is 255 (0b11111111), and any higher value will add some overhead, desyncing the LED faster (of course in our case it would still take a long time, but it is a good idea to always prefer to use numbers below 255 for better overall performance) 
 
 #### notes:
-creating a responsive input while other events still happen is not that simple, pretty good to teach many basic ideas
+Another factor to use a certain amount of delay (that does not apply for the AMEGA328p but does for more modern processors) is to save energy (when this is a concern and possible to implement, for example in the sparkfun board talked about in blink.c note 2) and leaving the processor to do other things in a multi-processes environment (like your computer or phone CPU, which has (probably) more than 300 threads to execute in only a few cores, and the last thing you want is a simple program using 100% of a core with fans working and heating up because of a button)
 
 
 

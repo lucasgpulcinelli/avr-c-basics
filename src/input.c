@@ -17,7 +17,7 @@ This file is licensed under the BSD-3-Clause ("New" or "Revised" BSD) License.
 int main(void)
 {
 	DDRB  = 0b00100000; //set PORTB5 (pin 13) as output and the rest as output (including pin 8)
-	PORTB = 0b00000001; //PORTB0 can recive input (pin 8, Button)
+	PORTB = 0b00000001; //PORTB0 can receive input (pin 8, Button)
 
 	int counter = 0; //counts how many 5ms delays happend 
 
