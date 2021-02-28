@@ -4,7 +4,6 @@ This file is licensed under the BSD-3-Clause ("New" or "Revised" BSD) License.
 */
 
 //program that recieves input from USART rx pin, turning on and off the bultin LED  depending on the input
-//this implementation can break if many keys are pressed at the same time because no overflow checking is made
 
 #define __AVR_ATmega328P__
 #define F_CPU 16000000L
@@ -100,12 +99,21 @@ int main(void)
 //this ISR fires when there is unread data just written to UDR0
 ISR(USART_RX_vect)
 {
-    //simply read the data
-    buf[read_end++] = UDR0;
-
-    //circular queue aspect
-    if(read_end == BUF_SIZE)
+    if(read_end != read_start - 1) //seeing if an overflow would happen
     {
-        read_end = 0;
+        //simply read the data
+        buf[read_end++] = UDR0;
+
+        //circular queue aspect
+        if(read_end == BUF_SIZE)
+        {
+            read_end = 0;
+        }
+    }
+    else
+    {
+        //reads the data but does not store it anywhere
+        //this is needed because the interrupt would fire forever because UDR0 has unread data
+        UDR0;
     }
 }
