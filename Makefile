@@ -6,28 +6,45 @@ DEV ?= /dev/ttyACM0 #device containing the arduino (for my machine always is thi
 DEVICE ?= atmega328p
 PROGRAMMER ?= arduino
 
-
 FILE ?= main
 BUILD_DIR = build
-OUT_FILE = $(BUILD_DIR)/$(FILE)
-SRC_FILE = src/$(FILE).c
+SRC_DIR = src
+
+CFLAGS ?= -Os -Wall -mmcu=$(DEVICE)
+CPPFLAGS ?= $(CFLAGS)
 
 .PHONY: clean flash asm
 
-all: output.hex
-	
-output.hex: $(OUT_FILE).bin
-	avr-objcopy -j .text -j .data -O ihex $(OUT_FILE).bin $(BUILD_DIR)/output.hex
 
-$(OUT_FILE).bin: $(SRC_FILE)
-	avr-gcc -Wall -Os -mmcu=$(DEVICE) -o $(OUT_FILE).bin $(SRC_FILE)
+all: $(BUILD_DIR)/$(FILE).hex
+
 
 clean: 
-	rm -r build/*
+	$(RM) -r build/
 
-asm: $(SRC_FILE)
-	avr-gcc -Wall -Os -mmcu=$(DEVICE) -o $(OUT_FILE).asm -S $(SRC_FILE)
 
-flash:
-	avrdude -p $(DEVICE) -c $(PROGRAMMER) -U flash:w:$(BUILD_DIR)/output.hex:i -F -P $(DEV)
+asm: $(BUILD_DIR)/$(FILE).asm
+
+
+flash: $(BUILD_DIR)/$(FILE).hex
+	sudo avrdude -p $(DEVICE) -c $(PROGRAMMER) -U flash:w:$<:i -F -P $(DEV)
+
+
+
+$(BUILD_DIR)/$(FILE).hex: $(BUILD_DIR)/$(FILE).bin
+	avr-objcopy -j .text -j .data -O ihex $< $@
+
+
+$(BUILD_DIR)/%.bin: $(SRC_DIR)/%.c
+	avr-gcc $(CFLAGS) -o $@ $<
+
+$(BUILD_DIR)/%.bin: $(SRC_DIR)/%.cpp
+	avr-g++ $(CPPFLAGS) -o $@ $<
+
+
+$(BUILD_DIR)/%.asm: $(SRC_DIR)/%.c
+	avr-gcc $(CFLAGS) -S -o $@ $<
+
+$(BUILD_DIR)/%.asm: $(SRC_DIR)/%.cpp
+	avr-g++ $(CPPFLAGS) -S -o $@ $<
 
