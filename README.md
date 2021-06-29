@@ -9,7 +9,7 @@ avr-gcc-c++ or avr-g++ if one wants to use c++ in projects
 
 
 ### Build instructions: 
-After cloning the repository and installing dependencies, use a terminal to the root of the project (directy inside a folder named avr_c_basics) issue "make FILE=<name of the source file inside src/ (without the .c)>" to build an specific file. To flash to a board use "make flash" (the prompt for a password is necessary for avrdude).
+After cloning the repository and installing dependencies, use a terminal to the root of the project (directy inside a folder named avr_c_basics) issue "make <name of the project (without the .c)>" to compile and flash the example. (the prompt for a password is necessary for avrdude).
 
 
 ### Notes:

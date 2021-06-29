@@ -2,49 +2,75 @@
 # Copyright (c) 2020, Lucas Eduardo Gulka Pulcinelli
 # This file is licensed under the BSD-3-Clause ("New" or "Revised" BSD) License.
 
-DEV ?= /dev/ttyACM0 #device containing the arduino (for my machine always is this device no matter the linux distribution, if "no such file or directory" errors ocurr try to find the device in the /dev directory)
-DEVICE ?= atmega328p
+
+DEV        ?= /dev/ttyACM0
+DEVICE     ?= atmega328p
 PROGRAMMER ?= arduino
 
-FILE ?= main
-BUILD_DIR = build
-SRC_DIR = src
-
-CFLAGS ?= -Os -Wall -mmcu=$(DEVICE)
-CPPFLAGS ?= $(CFLAGS)
-
-.PHONY: clean flash asm
+CC          = avr-gcc
+CXX         = avr-g++
+AVRDUDE    ?= avrdude
+OBJCOPY    ?= avr-objcopy
+SUDO       ?= sudo
 
 
-all: $(BUILD_DIR)/$(FILE).hex
+CFLAGS     += -Wall -Os -mmcu=$(DEVICE)
+CPPFLAGS   += $(CFLAGS)
+
+SRCD       ?= src
 
 
-clean: 
-	$(RM) -r build/
+.PHONY: all clean help
 
 
-asm: $(BUILD_DIR)/$(FILE).asm
+all: help
 
 
-flash: $(BUILD_DIR)/$(FILE).hex
-	sudo avrdude -p $(DEVICE) -c $(PROGRAMMER) -U flash:w:$<:i -F -P $(DEV)
+help:
+	@echo ""
+	@echo "This is a help page for this Makefile:"
+	@echo ""
+	@echo "Use \"make <name of the project without the extension>\""
+	@echo "to build and flash the project"
+	@echo ""
+	@echo "Examples:"
+	@echo "make blink"
+	@echo "make cppexample"
+	@echo "make main"
+	@echo ""
+	@echo "If you are using a board other than the atmega328p (arduino UNO), use"
+	@echo "\"make DEVICE=<name of your processor> <target>\""
+	@echo ""
+	@echo "If you receive an error such as \"no such device $(DEV)\","
+	@echo "search for the dev node for the board in /dev and use"
+	@echo "\"make DEV=/dev/<your dev node> <target>\""
+	@echo ""
+	@echo "Other options:"
+	@echo ""
+	@echo "Use \"make $(SRCD)/<project>.S\" to create the gnu assembly file for that project"
+
+%: $(SRCD)/%.hex
+	@echo "flashing $@ to the board in $(DEV)"
+	@$(SUDO) $(AVRDUDE) -p $(DEVICE) -c $(PROGRAMMER) -U flash:w:$<:i -F -P $(DEV)
+
+%.hex: %.bin
+	@echo "creating hex file $@"
+	@$(OBJCOPY) -j .text -j .data -O ihex $< $@
+
+%.bin: %.c
+	@echo "compiling $<"
+	@$(CC) $(CFLAGS) -o $@ $<
+
+%.bin: %.cpp
+	@echo "compiling $<"
+	@$(CXX) $(CPPFLAGS) -o $@ $<
 
 
+%.S: %.c
+	@echo "creating assembly file $@"
+	@$(CC) $(CFLAGS) -S -o $@ $<
 
-$(BUILD_DIR)/$(FILE).hex: $(BUILD_DIR)/$(FILE).bin
-	avr-objcopy -j .text -j .data -O ihex $< $@
-
-
-$(BUILD_DIR)/%.bin: $(SRC_DIR)/%.c
-	avr-gcc $(CFLAGS) -o $@ $<
-
-$(BUILD_DIR)/%.bin: $(SRC_DIR)/%.cpp
-	avr-g++ $(CPPFLAGS) -o $@ $<
-
-
-$(BUILD_DIR)/%.asm: $(SRC_DIR)/%.c
-	avr-gcc $(CFLAGS) -S -o $@ $<
-
-$(BUILD_DIR)/%.asm: $(SRC_DIR)/%.cpp
-	avr-g++ $(CPPFLAGS) -S -o $@ $<
+%.S: %.cpp
+	@echo "creating assembly file $@"
+	$(CXX) $(CPPFLAGS) -S -o $@ $<
 
