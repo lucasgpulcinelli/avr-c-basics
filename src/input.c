@@ -8,7 +8,6 @@ This file is licensed under the BSD-3-Clause ("New" or "Revised" BSD) License.
 
 //PINX physical voltage states of all port X pins
 
-#define __AVR_ATmega328P__
 #define F_CPU 16000000L
 
 #include <avr/io.h>

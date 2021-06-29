@@ -6,7 +6,6 @@ This file is licensed under the BSD-3-Clause ("New" or "Revised" BSD) License.
 //program that runs the same code as interrupt-8-bit-timer.c, 
 //however the timer used is 16 bit instead of 8 bit, making the ISR simpler because no extra counters will be needed
 
-#define __AVR_ATmega328P__
 #define F_CPU 16000000L
 
 #include <avr/io.h>

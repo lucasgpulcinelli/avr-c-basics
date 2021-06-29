@@ -6,7 +6,6 @@ This file is licensed under the BSD-3-Clause ("New" or "Revised" BSD) License.
 //program tha slowly increases an LED (connected on pin 6) brightness during 5 seconds then suddently turns it off, repeating the process forever
 
 
-#define __AVR_ATmega328P__
 #define F_CPU 16000000L
 
 #include <avr/io.h>

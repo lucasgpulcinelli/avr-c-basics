@@ -6,7 +6,6 @@ This file is licensed under the BSD-3-Clause ("New" or "Revised" BSD) License.
 
 //program that echos the USART input to output with a formatted message
 
-#define __AVR_ATmega328P__
 #define F_CPU 16000000L
 #define BAUD 9600
 #define UDRR0VAL (F_CPU/BAUD/16 - 1)
@@ -121,8 +120,9 @@ int main(void)
     sei();
 
     serial_write("Hello!\n"); //this just shows to the user that the main loop started
-	while(1)
-	{
+    
+    while(1)
+    {
         char msg[16];
 
         int i = 0;
@@ -142,7 +142,7 @@ int main(void)
         serial_write("!\n");
 
         _delay_ms(3000);
-	}
+    }
 }
 
 ISR(USART_TX_vect)

@@ -10,7 +10,6 @@ This file is licensed under the BSD-3-Clause ("New" or "Revised" BSD) License.
 //UCSR0A, UCSR0B and UCSR0C USART configuration registers
 //UDR0                      the read/write register for USART usage
 
-#define __AVR_ATmega328P__
 #define F_CPU 16000000L
 #define BAUD 9600                   //Baud rate, the speed (in bits per second) of data transferred
 #define UBRR0VAL (F_CPU/BAUD/16-1)  //Formula given by datasheet for the value of UBRR0 register

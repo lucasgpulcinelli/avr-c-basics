@@ -5,7 +5,6 @@ This file is licensed under the BSD-3-Clause ("New" or "Revised" BSD) License.
 
 //program that writes via USART using an efficient interrupt method, first writing "Hello World!" and then "Goodbye World..."
 
-#define __AVR_ATmega328P__
 #define F_CPU 16000000L
 #define BAUD 9600
 #define UBRR0VAL (F_CPU/BAUD/16-1)
